@@ -28,9 +28,9 @@ I decided to upgrade the receiver end of my toolkit with a RTL-SDR receiver. Thi
 and then analyzed them in Audacity. I was able to discover a few things about the RF protocol via this method:
 * There are short high pulses, long high pulses, and a long low reset/sync period.
 * The short high pulse is about 290us
-* the long high pulse is about 860us
-* the reset period is about 4375us
-* there is some kind of header/preamble that is sent at the beginning of each command
+* the long high pulse is about 860us (about 3x the short pulse)
+* the reset period is about 4375us (about 15x the short pulse)
+* there is some kind of header/preamble that is sent at the beginning of each command, most likely to allow the gain to adjust on the receiver
 * the header is 32 bits and the command is 33bits
 * the first 2 bytes are the command and the second two bytes + 1 bit are fixed for each remote, and appear to be a remote ID of some sort
 
@@ -49,7 +49,7 @@ I also used 433_rtl, which made the process pretty easy. An example of the outpu
     [04] {33} fd fd 16 33 80 : 11111101 11111101 00010110 00110011 1
 
 The "header" is basically the same as the command, however it is "shifted" left by one value, so we loose the first 1 in the above case, and end up with an even 32-bits.
-The command is a little funky at 33-bits. I'm not sure if the 1 at the end is meant to be a parity bit, or what.
+The command is a little funky at 33-bits. I'm not sure if the 1 at the end is meant to be a parity bit, or what. (Most likely is, and it was 1 for every command I sniffed between both remotes.)
 
 I found that the first 16 bits change with different button presses, and the last ones only changed when I switched to the other remote.
 
