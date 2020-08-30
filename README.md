@@ -34,6 +34,8 @@ and then analyzed them in Audacity. I was able to discover a few things about th
 * the header is 32 bits and the command is 33bits
 * the first 2 bytes are the command and the second two bytes + 1 bit are fixed for each remote, and appear to be a remote ID of some sort
 
+![Wave](/images/wave.png)
+
 I also used 433_rtl, which made the process pretty easy. An example of the output from it:
 
     Attempting demodulation... short_width: 320, long_width: 908, reset_limit: 4448, sync_width: 0 
@@ -66,7 +68,6 @@ Example of the wave:
     |  |______|      |__|  |______
     290   860    860 290 290 860
     
-![Wave](/images/wave.png)
 
 In order to get tis working, I collected all of the commands from both remotes with rtl_433. I then broke down the "commands" and the "Remote ID".
 Then, I created a (really ugly!) C++ program that would take the raw command and remote ID, and build a wave of pulses to emulate the remote.
