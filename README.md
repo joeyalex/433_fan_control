@@ -1,5 +1,6 @@
 # 433_fan_control
-Control szfunpower 6 speed RF ceiling fans with RPi
+Control szfunpower 6 speed RF ceiling fans with RPi!
+![Controller](/images/controller.jpg)
 
 # What is this all about?
 I have a pair of ceiling fans that use szfunpower FC989RS-B controllers. They have no pull chains, and are completely dependent on the remotes. They are also both in the same room, so having two remotes to control them seemed...less than ideal.
@@ -64,6 +65,8 @@ Example of the wave:
     | 1|      |  0   |  | 1|
     |  |______|      |__|  |______
     290   860    860 290 290 860
+    
+![Wave](/images/wave.png)
 
 In order to get tis working, I collected all of the commands from both remotes with rtl_433. I then broke down the "commands" and the "Remote ID".
 Then, I created a (really ugly!) C++ program that would take the raw command and remote ID, and build a wave of pulses to emulate the remote.
