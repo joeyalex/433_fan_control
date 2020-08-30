@@ -11,9 +11,9 @@ I'm not an RF hacker by any means, so there's probably a better way to do this. 
 * Generic 433mhz TX/RX units (https://www.amazon.com/gp/product/B086ZL8W1W)
 * RTL-SDR receiver (https://www.amazon.com/gp/product/B011HVUEME)
 * Raspberry Pi (Model 3b+ in my case)
-* [rtl_433]https://github.com/merbanan/rtl_433
-* [pilight]https://pilight.org
-* [pigpio]http://abyz.me.uk/rpi/pigpio/
+* [rtl_433](https://github.com/merbanan/rtl_433)
+* [pilight](https://pilight.org)
+* [pigpio](http://abyz.me.uk/rpi/pigpio/)
 * Some other various software that didn't work out
 
 ## Early Attempt
