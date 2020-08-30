@@ -71,8 +71,33 @@ Example of the wave:
 
 In order to get tis working, I collected all of the commands from both remotes with rtl_433. I then broke down the "commands" and the "Remote ID".
 Then, I created a (really ugly!) C++ program that would take the raw command and remote ID, and build a wave of pulses to emulate the remote.
-I
- decided to define the command as the first 16 bits, excludig the "header". (i.e. for the above example from rtl_433, the command is: 11111101 11111101)
+I decided to define the command as the first 16 bits, excludig the "header". (i.e. for the above example from rtl_433, the command is: 11111101 11111101)
+
+### Commands:
+Command|Code
+-------|----
+Power|```1110111011101110```
+1hr timer|```1111001111110011```
+4hr timer|```1111010111110101```
+8hr timer|```1111001011110010```
+Temperature?|```1111000111110001```
+Breeze/Wind|```1111000011110000```
+Speed 1|```1111110111111101```
+Speed 2|```1111110011111100```
+Speed 3|```1111101111111011```
+Speed 4|```1111101011111010```
+Speed 5|```1111100111111001```
+Speed 6|```1111100011111000```
+Reverse|```1111011011110110```
+Light On|```1111111111111111```
+Light Off|```1111111011111110```
+
+### Pulse Definitions:
+bit|pulse
+---|-----
+0|860us high, 290us low
+1|290us high, 860us low
+2/sync|290us high, 4375us low
 
 The remote ID was kind of strange, because I wasn't sure what to do with the trailing bit. It seemed like it was just a parity bit, but it appeared
 to be significant in the header...although I'm not fully convinced that the header is all that important, it might just be junk that's not quite a proper
