@@ -71,7 +71,7 @@ Example of the wave:
 
 In order to get tis working, I collected all of the commands from both remotes with rtl_433. I then broke down the "commands" and the "Remote ID".
 Then, I created a (really ugly!) C++ program that would take the raw command and remote ID, and build a wave of pulses to emulate the remote.
-I decided to define the command as the first 16 bits, excludig the "header". (i.e. for the above example from rtl_433, the command is: 11111101 11111101)
+I decided to define the command as the first 16 bits, excluding the "header". (i.e. for the above example from rtl_433, the command is: 11111101 11111101)
 
 ### Commands:
 Command|Code
