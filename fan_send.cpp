@@ -3,7 +3,7 @@
 
    g++ -o fan_send fan_send.c -lpigpio -lrt -lpthread
 
-   sudo ./pulse command remoteID
+   sudo ./fan_send command remoteID
 */
 
 #include <stdio.h>
@@ -11,6 +11,8 @@
 using namespace std;
 #include <iostream>
 #include <pigpio.h>
+#include <unistd.h>
+#include <sys/types.h>
 
 #define GPIO 17
 #define SHORT_PULSE 290;
@@ -65,6 +67,15 @@ string buildCommand(string const baseCommand, string const RemoteID) {
         returnValue += baseCommand;
         returnValue += RemoteID.substr(0,RemoteID.length()-1);
         returnValue += "2";
+        returnValue += baseCommand;
+        returnValue += RemoteID.substr(0,RemoteID.length()-1);
+        returnValue += "2";
+        returnValue += baseCommand;
+        returnValue += RemoteID.substr(0,RemoteID.length()-1);
+        returnValue += "2";
+        returnValue += baseCommand;
+        returnValue += RemoteID.substr(0,RemoteID.length()-1);
+        returnValue += "2";
 
 	
 	return returnValue;
@@ -104,10 +115,16 @@ void reset(gpioPulse_t pulse[], int index) {
 
 int main(int argc, char *argv[])
 {
-   if (gpioInitialise() < 0)
+   int timeout = 10;
+   int timeoutCount = 0;
+   while (gpioInitialise() < 0)
    {
-      fprintf(stderr, "pigpio initialisation failed\n");
-      return 1;
+      if (timeoutCount >= timeout) {
+	      fprintf(stderr, "pigpio initialisation failed\n");
+	      return 1;
+     }
+      sleep(1);
+      timeoutCount++;
    }
 	string code;
 	string command(argv[1]);
@@ -180,6 +197,7 @@ int main(int argc, char *argv[])
 	{
    		gpioWaveTxSend(wave_id, PI_WAVE_MODE_ONE_SHOT);
 		while(gpioWaveTxBusy()) {
+			sleep(0.5);
 		}
    		gpioWaveTxStop();
 	}
